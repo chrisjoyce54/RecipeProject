@@ -2,12 +2,14 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { RecipeModel } from './recipe-model';
 import { IngredientModel } from '../shared/ingredient-model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
-  recipeSelected = new EventEmitter<RecipeModel>();
+  // recipeSelected = new EventEmitter<RecipeModel>();
+  // recipeSelected = new Subject<RecipeModel>(); - now handled by router
   private recipes: RecipeModel[] = [
     new RecipeModel('Tasty Schnitzel',
       'A super-tasty Schnitzel - just awesome!',

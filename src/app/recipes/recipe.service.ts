@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class RecipeService {
+  recipesChanged = new Subject<RecipeModel[]>();
   // recipeSelected = new EventEmitter<RecipeModel>();
   // recipeSelected = new Subject<RecipeModel>(); - now handled by router
   private recipes: RecipeModel[] = [
@@ -36,5 +37,17 @@ export class RecipeService {
   }
   addIngredientsToShoppingList(ingredients: IngredientModel[]) {
     this.shoppingListService.addIngredients(ingredients);
+  }
+  addRecipe(recipe: RecipeModel) {
+    this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+  updateRecipe(index: number, newRecipe: RecipeModel) {
+    this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+  deleteRecipe(id: number) {
+    this.recipes.splice(id, 1);
+    this.recipesChanged.next(this.recipes.slice());
   }
 }

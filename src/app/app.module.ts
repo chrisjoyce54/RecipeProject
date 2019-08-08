@@ -40,8 +40,8 @@ import { RecipeService } from './recipes/recipe.service';
       AppRoutingModule
    ],
    providers: [
-    ShoppingListService,
-    RecipeService
+    // ShoppingListService,
+    // RecipeService
   ],
    bootstrap: [
       AppComponent

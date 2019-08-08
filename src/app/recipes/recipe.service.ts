@@ -9,25 +9,34 @@ import { Subject } from 'rxjs';
 })
 export class RecipeService {
   recipesChanged = new Subject<RecipeModel[]>();
+  recipes: RecipeModel[] = [];
+
   // recipeSelected = new EventEmitter<RecipeModel>();
   // recipeSelected = new Subject<RecipeModel>(); - now handled by router
-  private recipes: RecipeModel[] = [
-    new RecipeModel('Tasty Schnitzel',
-      'A super-tasty Schnitzel - just awesome!',
-      'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
-      [
-        new IngredientModel('Meat', 1),
-        new IngredientModel('French Fries', 20)
-      ]),
-    new RecipeModel('Big Fat Burger',
-      'What else you need to say?',
-      'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
-      [
-        new IngredientModel('Buns', 2),
-        new IngredientModel('Meat', 1)
-      ])
-  ];
+  // private recipes: RecipeModel[] = [
+  //   new RecipeModel('Tasty Schnitzel',
+  //     'A super-tasty Schnitzel - just awesome!',
+  //     'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
+  //     [
+  //       new IngredientModel('Meat', 1),
+  //       new IngredientModel('French Fries', 20)
+  //     ]),
+  //   new RecipeModel('Big Fat Burger',
+  //     'What else you need to say?',
+  //     'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
+  //     [
+  //       new IngredientModel('Buns', 2),
+  //       new IngredientModel('Meat', 1)
+  //     ])
+  // ];
+
   constructor(private shoppingListService: ShoppingListService) { }
+
+  setRecipes(recipes: RecipeModel[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
   getRecipes() {
     return this.recipes.slice();
   }
